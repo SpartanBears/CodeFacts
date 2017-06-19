@@ -12,7 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 		<!--CORDOVA JS-->
-		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="../cordova.js"></script>
 
 		<!--LIBRARIES CSS-->
 		<link rel="stylesheet" type="text/css" href="./libraries/materialize/css/materialize.css">
@@ -57,7 +57,7 @@
 					<div id="controlsRow" class="row">
 						<div id="controlsLeft" class="col s4">
 							<div id="inputCodeLinesCol" class="input-field col s12">
-								<input placeholder="Quantity" id="codeLinesInput" type="text" class="validate" required>
+								<input placeholder="Quantity" id="codeLinesInput" type="number" class="validate">
           						<label for="codeLinesInput">Lines of code</label>
 							</div>
 						</div>
@@ -67,7 +67,7 @@
 
 								<div id="selectInputCol" class="input-field col s12">
 									<select id="bookSelect">
-										<option value="" disabled selected>Select your book</option>
+										<option value="default" disabled selected>Select your book</option>
 										<option value="1770000">A Song of Ice and Fire (5 books)</option>
 										<option value="381104">Don Quijote de la Mancha</option>
 										<option value="783137">Bible</option>
@@ -83,7 +83,7 @@
 				<div id="contentBottom" class="row container">
 					
 					<div id="resultsRow" class="row">
-						<div id="resultCol" class="col s12 container content_results">
+						<div id="resultCol" class="col s12 container content_results" style="display: none;">
 							You've written <span id="resultTimesPerBook" class="content_results_highlight">0</span> times <span id="resultBookTitle" class="content_results_highlight">null</span>
 						</div>
 						
