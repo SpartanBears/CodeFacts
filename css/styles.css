@@ -45,19 +45,20 @@
 
 #contentTop{
 
-	height: 20%;
+	height: 40%;
 	padding: 2% 0px 0px 0px;
 }
 
 #contentMiddle{
 
-	height: 70%;
+	height: 30%;
 	padding: 2% 0px 0px 0px;
 }
 
 #contentBottom{
 
-	height: 0%;
+	height: 20%;
+	padding: 2% 0px 0px 0px;
 }
 
 #controlsRow{
@@ -79,6 +80,20 @@
 	font-family: 'Raleway Regular';
 }
 
+.content_results{
+
+	font-size: 1em;
+	color: black;
+	font-family: 'Raleway Medium Italic';
+}
+
+.content_results_highlight{
+
+	font-size: 1em;
+	color: black;
+	font-family: 'Raleway Bold Italic';
+}
+
 /*FONTS
 
 	titles
@@ -86,6 +101,12 @@
 
 	content
 	Raleway Regular
+
+	content: results
+	Raleway Medium Italic
+
+	content: results highlight;
+	Raleway Bold Italic
 
 */
 @font-face {
@@ -96,4 +117,15 @@
 @font-face {
     font-family: Raleway Regular;
     src: url(./fonts/Raleway/Raleway-Regular.ttf);
+}
+
+
+@font-face {
+    font-family: Raleway Medium Italic;
+    src: url(./fonts/Raleway/Raleway-MediumItalic.ttf);
+}
+
+@font-face {
+    font-family: Raleway Bold Italic;
+    src: url(./fonts/Raleway/Raleway-BoldItalic.ttf);
 }

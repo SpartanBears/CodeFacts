@@ -27,20 +27,133 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        this.receivedEvent('deviceready');
+
+        this.initInterface();
     },
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    initInterface: function(){
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        this.loadBookData();
+        this.initMaterializeElements();
+    },
 
-        console.log('Received Event: ' + id);
-    }
+    initMaterializeElements: function(){
+
+        //book select
+        $('#bookSelect').material_select();
+    }, 
+
+    //loads book data and set the update events
+    loadBookData: function(){
+
+        //TODO
+
+        $('#bookSelect').on('change', this.events.bookSelectEvt.bind(this));
+        $('#codeLinesInput').on('change paste keyup', this.events.linesInputEvt.bind(this));
+    },
+
+    updateResult: function(){
+
+        var devLines = this.getLinesInput();
+        var devWords = this.getWordsFromLines(devLines);
+        
+        var book = this.getSelectedBook();
+
+        var times = this.getTimesPerBook(book.words, devWords);
+
+        this.setResultTimesPerBook(times);
+        this.setResultBookTitle(book.title);
+    },
+
+    getLinesInput: function(){
+
+        var lines = 0;
+
+        var linesInputVal = $('#codeLinesInput').val();
+
+        if($.isNumeric(linesInputVal)){
+
+            lines = linesInputVal;
+        }
+
+        return lines;
+    },
+
+    getSelectedBook: function(){
+
+        var book = {};
+
+        var title = $('option:selected', '#bookSelect').text();
+        var words = $('option:selected', '#bookSelect').val();
+
+        book.title = title;
+        book.words = words;
+
+        return book;
+    },
+
+    setResultTimesPerBook: function(times){
+
+        $('#resultTimesPerBook').html(times);
+    },
+
+    setResultBookTitle: function(book){
+
+        $('#resultBookTitle').html(book);
+    },
+
+    getWordsFromLines: function(lines){
+
+        //words per line average
+        var factor = 3;
+
+        return (lines*factor);
+    },
+
+    //returns type number
+    getTimesPerBook: function(wordsBook, wordsDev){
+
+        var times = "";
+
+        //rounded to 1 decimal point
+        //var round = Math.round((wordsDev/wordsBook)*10)/10;
+        var calc = wordsDev/wordsBook;
+
+        var whole = Math.floor(calc);
+        var floating = (Math.round(calc*100)/100) % 1;
+        var fraction = new Fraction(floating).toFraction();
+
+        if(whole > 0){
+            times += whole;
+
+            if(floating > 0){
+
+                times += " and " + fraction;
+            }
+
+        }else if(floating > 0){
+
+            times += fraction;
+
+        }else{
+
+            times = 0;
+        }
+
+
+        return times;
+    },
+
+    events:{
+        bookSelectEvt:function(e){
+
+            this.updateResult();
+        },
+        linesInputEvt:function(e){
+
+            this.updateResult();
+        }
+    },
 };
 
 app.initialize();
